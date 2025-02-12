@@ -25,7 +25,7 @@ const tx = new TryX({
 ```
 This sets up an instance to fetch data with. **A timeout is required**. Since we do not want to take control over the max duration before bailig out this configuration is required to be setup for every instance. Above example would abort after 5 seconds.
 
-See the (examples folder)['/examples] for additional configuration options.
+See the (examples folder)[/examples] for additional configuration options.
 
 ### Fetch data
 After completing the config you can use your instance to fetch some data.
