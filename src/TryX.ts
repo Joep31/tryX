@@ -9,6 +9,12 @@ export type FetchResponse<T> = { data: T | null; error: Error | null };
  * 
  * @param config Configuration options for the error handler.
  * @param config.timeout The timeout for each fetch request is mandatory to be set. This timout controls the time the fetch request will wait before aborting in milliseconds.
+ * @exmple 
+ * ```ts
+ *  const handler = new TryX({
+ *    timeout: 5000,
+ *  });
+ * ```
  */
 export class TryX {
   private config: TryXConfig;
@@ -17,8 +23,7 @@ export class TryX {
     timeout: 0,
   }) {
     this.config = {
-      // Default configuration options
-      retries: config.retries ?? 0,
+      // Default configuration options      
       // Timeout is mandatory
       timeout: config.timeout,
       // Default to not log errors as the user can enable it

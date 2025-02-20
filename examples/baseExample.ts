@@ -6,12 +6,12 @@ const handler = new TryX({
 });
 
 // Mock API - JSONPlaceholder for testing
-const MOCK_API_SUCCESS = 'https://jsonplaceholder.typicode.com/todos/1';
+const MOCK_API_SUCCESS = 'https://jsonplaceholder.typicode.com/users/1';
 
 (async () => {
   const { data, error } = await handler.fetch<{name: string, id: string}>(MOCK_API_SUCCESS);
   if (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error message:', error);
     return;
   }
   console.log('Data:', data);

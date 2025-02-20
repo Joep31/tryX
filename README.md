@@ -74,7 +74,7 @@ Although you are free to use the package however you like we do have some recomm
 
 ### Store you instance in a file
 
-Although you could create an instance in any file you would like to use the package, we recommend you set it up in a seperate file and export the ready to cuse constant. For example:
+Although you could create an instance in any file you would like to use the package, we recommend you set it up in a seperate file and export the ready to use constant. For example:
 
 ```ts
 // in /lib/tx.ts
