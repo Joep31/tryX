@@ -16,16 +16,16 @@ To use this package some basic configuration is required
 
 ### Add cofig
 
-To sutup a new TryX instance you should do something like this:
+To setup a new TryX instance you should do something like this:
 
 ```ts
 const tx = new TryX({
   timeout: 5000,
 });
 ```
-This sets up an instance to fetch data with. **A timeout is required**. Since we do not want to take control over the max duration before bailig out this configuration is required to be setup for every instance. Above example would abort after 5 seconds.
+This sets up an instance to perform actions with. **A timeout is required**. Since we do not want to take control over the max duration before bailig out this configuration is required to be setup for every instance. Above example would abort after 5 seconds.
 
-See the (examples folder)[/examples] for additional configuration options.
+See the [examples folder](/examples) for additional configuration options.
 
 ### Fetch data
 After completing the config you can use your instance to fetch some data.
@@ -60,7 +60,7 @@ const { data, error } = await tx.fetch<Todo>('api.some-company.com/data')
 
 #### Overriding the return names
 
-In some cases you might get a conflict with one of the contants. For example, if data was already defined in your file. In this case you can overrride the names like so:
+In some cases you might get a conflict with one of the constants. For example, if data was already defined in your file. In this case you can overrride the names like so:
 
 ```ts
 const { data: someNewDataName, error: someNewErrorName } = await tx.fetch('api.some-company.com/data')
@@ -68,11 +68,17 @@ const { data: someNewDataName, error: someNewErrorName } = await tx.fetch('api.s
 
 This will resolve the conflict and your data now becomes accessible under the newly assigned name.
 
+Or alternatively you can define your own name and derive the data and error from that constant. 
+
+```ts
+const myResponseName = await tx.fetch('api.some-company.com/data')
+```
+
 ## Recommended structure
 
 Although you are free to use the package however you like we do have some recommendations.
 
-### Store you instance in a file
+### Store you instance in a standalone file
 
 Although you could create an instance in any file you would like to use the package, we recommend you set it up in a seperate file and export the ready to use constant. For example:
 
