@@ -96,3 +96,12 @@ const { data, error } = tx.fetch(...)
 ```
 
 This will ensure you just have to maintain one instance instead of multiple.
+
+# Development of this package
+
+## Run an example
+Run below command to run an example
+
+```bash
+npx tsx examples/baseExample
+```
