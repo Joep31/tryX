@@ -3,6 +3,7 @@ import { TryXConfig } from '../types/Config.types';
 import { FetchOptions } from '../types/FetchOptions.types';
 import { ExecutionResponse, FetchResponse } from '../types/Response.types';
 import { executeHandler } from './handlers/execute';
+import { executeAsyncHandler } from './handlers/executeAsync';
 
 /**
  * An error handler to aid with fetching data.
@@ -51,7 +52,6 @@ export class TryX {
    * Execute a function and handle any errors.
    * 
    * @param fn The function to execute.
-   * @param args The arguments to pass to the function.
    * @example ```ts
    * execute(() => devide(3, 4))
    * ```
@@ -60,6 +60,24 @@ export class TryX {
    */
   public execute<T>(fn: (...args: any[]) => T): ExecutionResponse<T> {
     const result = executeHandler<T>(fn);
+    if(result.error){
+      this.logErrors(result.error);
+    }
+    return result;
+  }
+
+  /**
+   * Execute a function asynchronously and handle any errors.
+   * 
+   * @param fn The function to execute asynchronously.
+   * @returns A promise that resolves with the data or rejects with an error.
+   * @example ```ts
+   * executeAsync(() => await uploadToServer())
+   * ```
+   * @public
+   */
+  public async executeAsync<T>(fn: (...args: any[]) => Promise<T>): Promise<ExecutionResponse<T>> {
+    const result = await executeAsyncHandler<T>(fn, this.config.timeout);
     if(result.error){
       this.logErrors(result.error);
     }
