@@ -74,6 +74,33 @@ Or alternatively you can define your own name and derive the data and error from
 const myResponseName = await tx.fetch('api.some-company.com/data')
 ```
 
+### Safely execute functions (execute handler)
+
+As well as fetching data you can also use this package to safely perform function executions. Using this method works roughly the same as the fetch method. To safely execute a function use the execute method like so:
+```ts
+const { data, error } = handler.execute(someFunction);
+```
+Doing so will wrap the function in a try catch block just like the fetch method. The error is ready for you to be handled as you wish.
+
+#### Run a function with params
+If a function takes params you can pass the function like so:
+```ts
+const { data, error } = handler.execute(() => devide(3, 4));
+```
+
+#### Handling the data
+If the functions returns some data, data will be typed automatically. If the function rturns void you can ignore the data object and just check for errors. For example:
+```ts
+const { error } = handler.execute(() => downdload(myFile));
+
+if(error){
+  toast.error('File download failed', {
+    description: error.message,
+  })
+}
+```
+If the download function just performs some logic we can leave out the data and just handle the error if it exsists.
+
 ## Recommended structure
 
 Although you are free to use the package however you like we do have some recommendations.
@@ -96,3 +123,12 @@ const { data, error } = tx.fetch(...)
 ```
 
 This will ensure you just have to maintain one instance instead of multiple.
+
+# Development of this package
+
+## Run an example
+Run below command to run an example
+
+```bash
+npx tsx examples/baseExample
+```
