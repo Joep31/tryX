@@ -1,9 +1,8 @@
 import { fetchHandler } from './handlers/fetch';
 import { TryXConfig } from '../types/Config.types';
-import { FetchOptions } from '../types/FetchOptions.types';
 import { ExecutionResponse, FetchResponse } from '../types/Response.types';
-import { executeHandler } from './handlers/execute';
 import { executeAsyncHandler } from './handlers/executeAsync';
+import { executeHandler } from './handlers/execute';
 
 /**
  * An error handler to aid with fetching data.
@@ -20,16 +19,8 @@ import { executeAsyncHandler } from './handlers/executeAsync';
 export class TryX {
   private config: TryXConfig;
 
-  constructor(config: TryXConfig = {
-    timeout: 0,
-  }) {
-    this.config = {
-      // Default configuration options      
-      // Timeout is mandatory
-      timeout: config.timeout,
-      // Default to not log errors as the user can enable it
-      logErrors: config.logErrors ?? 'never',
-    };
+  constructor(config: TryXConfig) {
+    this.config = config;
   }
 
   /**
@@ -40,26 +31,8 @@ export class TryX {
    * @returns A promise that resolves with the data or rejects with an error.
    * @public
    */
-  public async fetch<T>(url: string, options?: FetchOptions): Promise<FetchResponse<T>> {
+  public async fetch<T>(url: string, options?: RequestInit): Promise<FetchResponse<T>> {
     const result = await fetchHandler<T>(url, {...options, ...this.config});
-    if(result.error){
-      this.logErrors(result.error);
-    }
-    return result;
-  }
-
-  /**
-   * Execute a function and handle any errors.
-   * 
-   * @param fn The function to execute.
-   * @example ```ts
-   * execute(() => devide(3, 4))
-   * ```
-   * @returns The data or an error.
-   * @public
-   */
-  public execute<T>(fn: (...args: any[]) => T): ExecutionResponse<T> {
-    const result = executeHandler<T>(fn);
     if(result.error){
       this.logErrors(result.error);
     }
@@ -78,6 +51,24 @@ export class TryX {
    */
   public async executeAsync<T>(fn: (...args: any[]) => Promise<T>): Promise<ExecutionResponse<T>> {
     const result = await executeAsyncHandler<T>(fn, this.config.timeout);
+    if(result.error){
+      this.logErrors(result.error);
+    }
+    return result;
+  }
+
+  /**
+   * Execute a function and handle any errors.
+   * 
+   * @param fn The function to execute.
+   * @example ```ts
+   * execute(() => devide(3, 4))
+   * ```
+   * @returns The data or an error.
+   * @public
+   */
+  public execute<T>(fn: (...args: any[]) => T): ExecutionResponse<T> {
+    const result = executeHandler<T>(fn);
     if(result.error){
       this.logErrors(result.error);
     }
