@@ -1,6 +1,6 @@
 {
   "name": "try-x",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A lightweight error handling package for JavaScript and TypeScript.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
