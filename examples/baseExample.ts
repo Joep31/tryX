@@ -9,7 +9,7 @@ const handler = new TryX({
 const MOCK_API_SUCCESS = 'https://jsonplaceholder.typicode.com/users/1';
 
 (async () => {
-  const { data, error } = await handler.fetch<{name: string, id: string}>(MOCK_API_SUCCESS);
+  const { data, error } = await handler.fetch(MOCK_API_SUCCESS);
   if (error) {
     console.error('Error message:', error);
     return;
