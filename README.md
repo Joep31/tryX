@@ -7,7 +7,7 @@ A package to simplify error handling and make fetching more predictable and easy
 Run the command below to install the package
 
 ```bash
-npm i try-x
+npm i @j31/tryx-handler
 ```
 
 ## How to use the package
