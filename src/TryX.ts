@@ -1,6 +1,6 @@
 import { fetchHandler } from './handlers/fetch';
-import { TryXConfig } from '../types/Config.types';
-import { ExecutionResponse, FetchResponse } from '../types/Response.types';
+import { TryXConfig } from './types/Config.types';
+import { ExecutionResponse, FetchResponse } from './types/Response.types';
 import { executeAsyncHandler } from './handlers/executeAsync';
 import { executeHandler } from './handlers/execute';
 

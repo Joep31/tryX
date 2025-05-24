@@ -1,4 +1,4 @@
-import { ExecutionResponse } from '../../types/Response.types';
+import { ExecutionResponse } from '../types/Response.types';
 import { performErrorChecks } from '../utils/performErrorChecks';
 
 export function executeHandler<T>(

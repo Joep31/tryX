@@ -1,5 +1,5 @@
 {
-  "name": "try-x",
+  "name": "tryx-handler",
   "version": "0.1.0",
   "description": "A lightweight error handling package for JavaScript and TypeScript.",
   "main": "dist/index.js",
@@ -9,16 +9,15 @@
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts'",
     "test": "jest",
-    "format": "prettier --write 'src/**/*.ts'",
-    "prepare": "npm run build"
+    "format": "prettier --write 'src/**/*.ts'"
   },
-  "homepage": "https://github.com/Joep31/tryX-package#readme",
+  "homepage": "https://github.com/Joep31/tryX#readme",
   "bugs": {
-    "url": "https://github.com/Joep31/tryX-package/issues"
+    "url": "https://github.com/Joep31/tryX/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Joep31/tryX-package.git"
+    "url": "git+https://github.com/Joep31/tryX.git"
   },
   "keywords": [
     "error-handling",

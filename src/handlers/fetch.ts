@@ -1,6 +1,6 @@
-import { FetchOptions } from '../../types/FetchOptions.types';
+import { FetchOptions } from '../types/FetchOptions.types';
 import { performErrorChecks } from '../utils/performErrorChecks';
-import { FetchResponse } from '../../types/Response.types';
+import { FetchResponse } from '../types/Response.types';
 
 export async function fetchHandler<T>(
   url: string,
