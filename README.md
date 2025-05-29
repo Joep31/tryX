@@ -80,12 +80,18 @@ Or alternatively you can define your own name and derive the data and error from
 const myResponseName = await tx.fetch('api.some-company.com/data');
 ```
 
-### Safely execute functions (execute handler)
+### Safely execute (async) functions
 
 As well as fetching data you can also use this package to safely perform function executions. Using this method works roughly the same as the fetch method. To safely execute a function use the execute method like so:
 
 ```ts
-const { data, error } = handler.execute(someFunction);
+const { data, error } = tx.execute(someFunction);
+```
+
+Or with an async function
+
+```ts
+const { data, error } = await tx.executeAsync(someAsyncFunction);
 ```
 
 Doing so will wrap the function in a try catch block just like the fetch method. The error is ready for you to be handled as you wish.
@@ -95,7 +101,7 @@ Doing so will wrap the function in a try catch block just like the fetch method.
 If a function takes params you can pass the function like so:
 
 ```ts
-const { data, error } = handler.execute(() => devide(3, 4));
+const { data, error } = tx.execute(() => devide(3, 4));
 ```
 
 #### Handling the data
@@ -103,7 +109,7 @@ const { data, error } = handler.execute(() => devide(3, 4));
 If the functions returns some data, data will be typed automatically. If the function rturns void you can ignore the data object and just check for errors. For example:
 
 ```ts
-const { error } = handler.execute(() => downdload(myFile));
+const { error } = tx.execute(() => downdload(myFile));
 
 if (error) {
   toast.error('File download failed', {
