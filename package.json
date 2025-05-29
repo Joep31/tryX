@@ -1,6 +1,6 @@
 {
   "name": "@j31/tryx-handler",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A lightweight error handling package for JavaScript and TypeScript.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
