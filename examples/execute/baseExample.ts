@@ -1,7 +1,7 @@
 import { TryX } from '../../src/TryX';
 
 // Instantiate the ErrorHandler with custom options
-const handler = new TryX({
+const tx = new TryX({
   timeout: 5000,
 });
 
@@ -17,7 +17,7 @@ const devide = (a: number, b: number) => {
 }
 
 (() => {
-  const { data, error } = handler.execute(() => devide(3, 4));
+  const { data, error } = tx.execute(() => devide(3, 4));
   if (error) {
     console.error('Error message:', error);
     return;

@@ -1,7 +1,7 @@
 import { TryX } from '../../src/TryX';
 
 // Instantiate the ErrorHandler with custom options
-const handler = new TryX({
+const tx = new TryX({
   timeout: 5000,
   logErrors: 'always',
 });
@@ -18,7 +18,7 @@ const dummy = async () => {
 };
 
 (async() => {
-  const { data, error } = await handler.executeAsync(dummy);
+  const { data, error } = await tx.executeAsync(dummy);
   if (error) {
     return;
   }

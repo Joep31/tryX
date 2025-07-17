@@ -27,4 +27,14 @@ describe('TryX configuration', () => {
       logErrors: 'always'
     });
   });
+
+  it('Should set the onError callback correctly', () => {
+    const mockCallback = jest.fn();
+    const tx = new TryX({
+      timeout: 5000,
+      onError: mockCallback
+    });
+
+    expect(tx.getConfig().onError).toBe(mockCallback);
+  });
 });

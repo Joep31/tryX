@@ -26,7 +26,23 @@ const tx = new TryX({
 
 This sets up an instance to perform actions with. **A timeout is required**. Since we do not want to take control over the max duration before bailig out this configuration is required to be setup for every instance. Above example would abort after 5 seconds.
 
-See the [examples folder](/examples) for additional configuration options.
+See the [examples folder](/examples) for additional configuration options or read through the options below.
+
+#### timeout
+
+The max duration of an async task executed. This config is required.
+
+#### logErrors
+
+Choose if and how you would like errors to be logged to the console. Options are:
+
+- Always
+- Only in development
+- Never (default)
+
+#### onError
+
+A callback that passes the error when it occurs anywhere in your code. This callback can be used to log the error to an external service.
 
 ### Fetch data
 
