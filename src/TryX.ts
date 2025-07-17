@@ -37,7 +37,7 @@ export class TryX {
   ): Promise<FetchResponse<T>> {
     const result = await fetchHandler<T>(url, { ...options, ...this.config });
     if (result.error) {
-      this.logErrors(result.error);
+      this.handleError(result.error);
     }
     return result;
   }
@@ -57,7 +57,7 @@ export class TryX {
   ): Promise<ExecutionResponse<T>> {
     const result = await executeAsyncHandler<T>(fn, this.config.timeout);
     if (result.error) {
-      this.logErrors(result.error);
+      this.handleError(result.error);
     }
     return result;
   }
@@ -75,9 +75,19 @@ export class TryX {
   public execute<T>(fn: (...args: any[]) => T): ExecutionResponse<T> {
     const result = executeHandler<T>(fn);
     if (result.error) {
-      this.logErrors(result.error);
+      this.handleError(result.error);
     }
     return result;
+  }
+
+  /**
+   * Handle errors based on the configuration.
+   * @private
+   * @param error The error to handle.
+   */
+  private handleError(error: Error) {
+    this.logErrors(error);
+    this.callbackOnError(error);
   }
 
   /**
@@ -93,6 +103,17 @@ export class TryX {
     if (this.config.logErrors === 'dev-only') {
       if (process.env.NODE_ENV !== 'development') return;
       console.error(error);
+    }
+  }
+
+  /**
+   * Provide error to callback if provided.
+   * @private
+   * @param error The error to handle.
+   */
+  private callbackOnError(error: Error): void {
+    if (this.config.onError) {
+      this.config.onError(error);
     }
   }
 

@@ -14,4 +14,10 @@ export interface TryXConfig {
    * @example logErrors: 'dev-only' // Log errors only in development
    */
   logErrors?: 'always' | 'never' | 'dev-only';
+  /**
+   * Callback triggered when an error occurs.
+   * @example onError: (error) => storeError(error)
+   * @description This callback allows you to log errors to an external service if you wish to do so.
+   */
+  onError?: (error: Error) => void;
 }

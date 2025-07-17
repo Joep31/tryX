@@ -1,7 +1,7 @@
 import { TryX } from '../src/TryX';
 
 // Instantiate the ErrorHandler with custom options
-const handler = new TryX({
+const tx = new TryX({
   timeout: 5000,
 });
 
@@ -14,7 +14,7 @@ type Todo = {
 }
 
 (async () => {
-  const { data, error } = await handler.fetch<Todo>(MOCK_API_SUCCESS);
+  const { data, error } = await tx.fetch<Todo>(MOCK_API_SUCCESS);
   if (error) {
     console.error('Error fetching data:', error);
     return;
