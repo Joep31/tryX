@@ -9,7 +9,8 @@
 		"build": "tsc",
 		"lint": "eslint 'src/**/*.ts'",
 		"test": "jest",
-		"format": "prettier --write 'src/**/*.ts'"
+		"format": "prettier --write 'src/**/*.ts'",
+		"typecheck": "tsc --noEmit"
 	},
 	"homepage": "https://github.com/Joep31/tryX#readme",
 	"bugs": {
