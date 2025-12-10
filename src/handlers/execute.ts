@@ -1,11 +1,11 @@
 import type { Response } from "../types/Response.types";
 import { performErrorChecks } from "../utils/performErrorChecks";
 
-export function executeHandler<T>(fn: (...args: any[]) => T): Response<T> {
-	try {
-		const data: T = fn();
-		return { data, error: null };
-	} catch (error) {
-		return performErrorChecks(error);
-	}
+export function executeHandler<T>(fn: (...args: unknown[]) => T): Response<T> {
+  try {
+    const data: T = fn();
+    return { data, error: null };
+  } catch (error) {
+    return performErrorChecks(error);
+  }
 }

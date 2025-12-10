@@ -1,9 +1,9 @@
-import { TryX } from '../../src/TryX';
+import { TryX } from "../../src/TryX";
 
 // Instantiate the ErrorHandler with custom options
 const tx = new TryX({
   timeout: 5000,
-  logErrors: 'always',
+  logErrors: "always",
 });
 
 // Mock function to trigger the timeout
@@ -14,11 +14,11 @@ const dummy = async () => {
     }, 6000);
   });
 
-  console.log("Completed");
+  console.info("Completed");
 };
 
-(async() => {
-  const { data, error } = await tx.executeAsync(dummy);
+(async () => {
+  const { error } = await tx.executeAsync(dummy);
   if (error) {
     return;
   }

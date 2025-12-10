@@ -1,1 +1,1 @@
-export * from './TryX';
+export * from "./TryX";

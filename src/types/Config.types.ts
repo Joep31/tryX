@@ -13,7 +13,7 @@ export interface TryXConfig {
    * @example logErrors: 'never' // Never log errors
    * @example logErrors: 'dev-only' // Log errors only in development
    */
-  logErrors?: 'always' | 'never' | 'dev-only';
+  logErrors?: "always" | "never" | "dev-only";
   /**
    * Callback triggered when an error occurs.
    * @example onError: (error) => storeError(error)

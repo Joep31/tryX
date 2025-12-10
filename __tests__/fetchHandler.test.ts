@@ -1,7 +1,7 @@
 import { TryX } from "../src";
 import { tx } from "../src/lib/tx";
 
-describe('fetchHandler', () => {
+describe("fetchHandler", () => {
   beforeEach(() => {
     jest.useFakeTimers();
     global.fetch = jest.fn();
@@ -12,41 +12,46 @@ describe('fetchHandler', () => {
     jest.resetAllMocks();
   });
 
-  it('should return JSON data on success', async () => {
-    const mockJson = { data: {message: 'Hello world'} };
+  it("should return JSON data on success", async () => {
+    const mockJson = { data: { message: "Hello world" } };
     (fetch as jest.Mock).mockResolvedValue({
       ok: true,
       json: async () => mockJson,
     });
 
-    const result = await tx.fetch('https://api.example.com/test');
+    const result = await tx.fetch("https://api.example.com/test");
 
     expect(result.data).toEqual(mockJson);
   });
 
-  it('should return an error on failure', async () => {
-    const mockError = new Error('Network error');
+  it("should return an error on failure", async () => {
+    const mockError = new Error("Network error");
     (fetch as jest.Mock).mockRejectedValue(mockError);
 
-    const result = await tx.fetch('https://api.example.com/test');
+    const result = await tx.fetch("https://api.example.com/test");
 
     expect(result.error).toEqual(mockError);
   });
 
-  it('should handle HTTP errors', async () => {
+  it("should handle HTTP errors", async () => {
     (fetch as jest.Mock).mockResolvedValue({
       ok: false,
       status: 404,
-      statusText: 'Not Found',
+      statusText: "Not Found",
     });
 
-    const result = await tx.fetch('https://api.example.com/test');
+    const result = await tx.fetch("https://api.example.com/test");
 
-    expect(result.error).toEqual(new Error('HTTP error! Status: 404 Reason: Not Found'));
+    expect(result.error).toEqual(
+      new Error("HTTP error! Status: 404 Reason: Not Found"),
+    );
   });
 
-  it('should abort and catch timeout errors', async () => {
-    const abortError = new DOMException('The user aborted a request.', 'AbortError');
+  it("should abort and catch timeout errors", async () => {
+    const abortError = new DOMException(
+      "The user aborted a request.",
+      "AbortError",
+    );
 
     (global.fetch as jest.Mock).mockImplementation((_url, options) => {
       const signal = options?.signal;
@@ -55,7 +60,7 @@ describe('fetchHandler', () => {
         if (signal?.aborted) {
           reject(abortError);
         } else {
-          signal?.addEventListener?.('abort', () => {
+          signal?.addEventListener?.("abort", () => {
             reject(abortError);
           });
         }
@@ -63,7 +68,7 @@ describe('fetchHandler', () => {
     });
 
     const txShort = new TryX({ timeout: 100 });
-    const resultPromise = txShort.fetch('https://api.example.com/slow');
+    const resultPromise = txShort.fetch("https://api.example.com/slow");
 
     // Advance time to trigger the abort
     jest.advanceTimersByTime(150);
@@ -71,29 +76,28 @@ describe('fetchHandler', () => {
     const result = await resultPromise;
 
     expect(result.error).toBeInstanceOf(DOMException);
-    expect(result.error!.name).toBe('AbortError');
+    expect(result.error!.name).toBe("AbortError");
   });
 
-  it('should forward custom fetch options', async () => {
+  it("should forward custom fetch options", async () => {
     (fetch as jest.Mock).mockResolvedValue({
       ok: true,
-      json: async () => ({ foo: 'bar' }),
+      json: async () => ({ foo: "bar" }),
     });
-  
-    await tx.fetch('https://api.example.com', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ foo: 'bar' }),
+
+    await tx.fetch("https://api.example.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ foo: "bar" }),
     });
-  
+
     expect(fetch).toHaveBeenCalledWith(
-      'https://api.example.com',
+      "https://api.example.com",
       expect.objectContaining({
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ foo: 'bar' }),
-      })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ foo: "bar" }),
+      }),
     );
   });
-  
-})
+});
