@@ -10,6 +10,8 @@
     "test": "jest",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write",
+    "lint": "biome lint .",
+    "format": "biome format .",
     "typecheck": "tsc --noEmit"
   },
   "homepage": "https://github.com/Joep31/tryX#readme",
