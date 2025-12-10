@@ -8,4 +8,4 @@ import { TryX } from "../";
  */
 export const tx = new TryX({
   timeout: 5000,
-})
+});

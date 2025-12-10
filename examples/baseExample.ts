@@ -1,4 +1,4 @@
-import { TryX } from '../src/TryX';
+import { TryX } from "../src/TryX";
 
 // Instantiate the ErrorHandler with custom options
 const tx = new TryX({
@@ -6,13 +6,13 @@ const tx = new TryX({
 });
 
 // Mock API - JSONPlaceholder for testing
-const MOCK_API_SUCCESS = 'https://jsonplaceholder.typicode.com/users/1';
+const MOCK_API_SUCCESS = "https://jsonplaceholder.typicode.com/users/1";
 
 (async () => {
   const { data, error } = await tx.fetch(MOCK_API_SUCCESS);
   if (error) {
-    console.error('Error message:', error);
+    console.error("Error message:", error);
     return;
   }
-  console.log('Data:', data);
+  console.info("Data:", data);
 })();
